@@ -2,13 +2,16 @@ const apikey = "d83c64685d09c8b739e49ac2e5749cc3";
 
 const weatherDataEl = document.getElementById("weather-data");
 const cityInput = document.getElementById("city-input")
+const cityInput2 = document.getElementById("city-input2")
 const formEl = document.querySelector("form")
+const cityName = document.getElementById("city-name")
 
 formEl.addEventListener("submit",(event) => {
     event.preventDefault();
-    const cityValue = cityInput.value;
+    const cityValue = cityInput.value || cityInput2.value;
     
     getWeatherData(cityValue)
+    
 
     
 })
@@ -30,8 +33,10 @@ async function getWeatherData(cityValue){
 
        const icon = data.weather[0].icon
 
+       const city = data.name
+
        const details = [
-        `Feels like: ${Math.round(data.main.feel_like)}`,
+        `Feels like: ${Math.round(data.main.feels_like)}`,
         `Humidity: ${data.main.humidity}%`,
         `Wind speed: ${data.wind.speed} m/s`,
         
@@ -43,11 +48,22 @@ async function getWeatherData(cityValue){
 
        weatherDataEl.querySelector(".description").textContent = description
 
+       weatherDataEl.querySelector("#city-name").innerHTML = `${city}`
+
        weatherDataEl.querySelector(".details").innerHTML = details.map((detail) => `<div>${detail}</div>`).join("")
+
+       cityInput.value=""
+       cityInput2.value=""
 
        
        
     } catch (error) {
+        weatherDataEl.querySelector(".icon").innerHTML = "";
+        weatherDataEl.querySelector(".temperature").textContent = "";
+        weatherDataEl.querySelector(".description").textContent =
+          "An error happened, please try again later"; cityInput.value ="" ;
+    
+        weatherDataEl.querySelector(".details").innerHTML = "";
         
-    }
+}
 }

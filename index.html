@@ -11,10 +11,23 @@
     <div class="container">
         <h1>Mbari ya Nderi Weather App</h1>
         <form>
-            <Input type="text" id="city-input" placeholder="Enter City"></Input>
+            <Input type="text" onfocus='this.value=""' id="city-input" placeholder="Enter City"></Input>
+            <label for="cities">Or choose a city</label>
+            <select name="cities" id="city-input2" >
+                <option value=""  >Select</option>
+                <option value="Nairobi"  >Nairobi</option>
+                <option value="Kiambu"  >Kiambu</option>
+                <option value="Rongai"  >Rongai</option>
+                <option value="Kasarani"  >Kasarani</option>
+                <option value="Thika"  >Thika</option>
+                <option value="Muranga"  >Muranga</option>
+                <option value="Mombasa"  >Mombasa</option>
+            </select>
+        
             <input type="submit" value="Get Weather">
         </form>
         <div id="weather-data">
+            <div><h1>City:<span id="city-name"></span></h1></div>
             <div class="icon">
                 <img src="http://openweathermap.org/img/wn/01d.png" alt="Weather Icon">
             </div>
